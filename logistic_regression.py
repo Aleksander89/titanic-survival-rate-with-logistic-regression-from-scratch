@@ -5,8 +5,19 @@ class LogisticRegression():
     def __init__(self):
         self._coeff = []
     
-    def fit(self, X, Y, num_iterations=50000, learning_rate=0.001, lmbda=0, verbose=True):
-        _, params, _ = self._gradient_descent(X, Y, num_iterations, learning_rate, lmbda, verbose)
+    def fit(self, X, y, num_iterations=50000, learning_rate=0.001, lmbda=0, verbose=True):
+        """
+        Fits the model to the training data.
+
+        Arguments:
+        X - Matrix 
+        y - Vector
+        num_iterations - Number of iterations 
+        learning_rate - learning rate/step length for batch gradient descent
+        lmbda - lambda for l2-regularization. Defaults to 0 for no penalty.
+        verbose - To output cost per 1000 iteration and plot cost vs iterations
+        """
+        _, params, _ = self._gradient_descent(X, y, num_iterations, learning_rate, lmbda, verbose)
         self._coeff = params
 
     def predict(self, X, decision_boundary=0.5):
