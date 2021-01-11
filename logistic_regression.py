@@ -5,8 +5,8 @@ class LogisticRegression():
     def __init__(self):
         self._coeff = []
     
-    def fit(self, X, Y, num_iterations=50000, learning_rate=0.001, lmbda=0, plot_cost=True):
-        _, params, _ = self._gradient_descent(X, Y, num_iterations, learning_rate, lmbda, plot_cost)
+    def fit(self, X, Y, num_iterations=50000, learning_rate=0.001, lmbda=0, verbose=True):
+        _, params, _ = self._gradient_descent(X, Y, num_iterations, learning_rate, lmbda, verbose)
         self._coeff = params
 
     def predict(self, X, decision_boundary=0.5):
