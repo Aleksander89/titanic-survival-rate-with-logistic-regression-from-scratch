@@ -6,14 +6,13 @@ class LogisticRegression():
         self._coeff = []
     
     def fit(self, X, y, num_iterations=50000, learning_rate=0.001, lmbda=0, verbose=True):
-        """
-        Fits the model to the training data.
+        """Fits the model to the training data.
 
         Arguments:
-        X - Matrix 
-        y - Vector
-        num_iterations - Number of iterations 
-        learning_rate - learning rate/step length for batch gradient descent
+        X - Matrix of size (num_samples, num_features) with training data
+        y - Vector of size (num_samples, 1) with correct labels
+        num_iterations - Number of iterations used in gradient descent
+        learning_rate - learning rate/step length for gradient descent
         lmbda - lambda for l2-regularization. Defaults to 0 for no penalty.
         verbose - To output cost per 1000 iteration and plot cost vs iterations
         """
@@ -21,14 +20,33 @@ class LogisticRegression():
         self._coeff = params
 
     def predict(self, X, decision_boundary=0.5):
+        """Predicts class labels for samples in X
+
+        Arguments:
+        X - Matrix of size (num_samples, num_features)
+        decision_boundary - Prediction boundary. Defaults to 0.5.
+
+        Returns:
+        predictions - Vector of class labels for given samples
+        """
         X = np.vstack([np.ones(X.shape[0]), X.T])
         y_hat = self._sigmoid(np.dot(X.T, self._coeff))
-        return np.where(y_hat > decision_boundary, 1, 0)
+        predictions = np.where(y_hat > decision_boundary, 1, 0)
+        return predictions
 
     def score(self, y_true, y_pred):
+        """Returns the accuracy 
+
+        Arguments:
+        y_true - Correct class labels
+        y_pred - Estimated class labels
+
+        Returns:
+        score - Mean accuracy of y_pred wrt. y_true.
+        """
         assert len(y_true) == len(y_pred), "Length must be equal"
         accuracy = 100*np.squeeze(sum(np.where(y_true == y_pred,1, 0))/len(y_true))
-        print(f'{round(accuracy, 5)} % accuracy')
+        return accuracy
 
     def _gradient_descent(self, X, Y, num_iterations, learning_rate, lmbda, plot_cost):
             X = np.vstack([np.ones(X.shape[0]), X.T])           
