@@ -160,4 +160,8 @@ dmypy.json
 .history
 .ionide
 
+# Diverse
+cleaning_openml_titanic_dataset.ipynb
+titanic_clean.csv
+
 # End of https://www.toptal.com/developers/gitignore/api/jupyternotebooks,visualstudiocode,python
