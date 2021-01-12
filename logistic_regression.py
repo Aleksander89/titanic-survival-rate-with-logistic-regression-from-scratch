@@ -29,7 +29,7 @@ class LogisticRegression():
         Returns:
         predictions - Vector of class labels for given samples
         """
-        X = np.vstack([np.ones(X.shape[0]), X.T])
+        X = np.vstack([np.ones(X.shape[0]), X.T])                   # Adding row of ones to handle bias term
         y_hat = self._sigmoid(np.dot(X.T, self._coeff))
         predictions = np.where(y_hat > decision_boundary, 1, 0)
         return predictions
@@ -49,8 +49,8 @@ class LogisticRegression():
         return accuracy
 
     def _gradient_descent(self, X, Y, num_iterations, learning_rate, lmbda, plot_cost):
-            X = np.vstack([np.ones(X.shape[0]), X.T])           
-            theta = np.zeros(X.shape[0]).reshape(-1, 1)         # initializing weights and bias
+            X = np.vstack([np.ones(X.shape[0]), X.T])               # Adding row of ones to handle bias term
+            theta = np.zeros(X.shape[0]).reshape(-1, 1)             # Initializing weights and bias
             m = len(Y)
             costs = []
             
